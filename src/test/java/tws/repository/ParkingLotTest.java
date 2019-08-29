@@ -1,5 +1,11 @@
 package tws.repository;
 
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
+import javax.sql.DataSource;
+
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,19 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.jdbc.JdbcTestUtils;
+
 import tws.entity.Employee;
-
-import javax.sql.DataSource;
-import java.util.List;
-
-import static org.junit.Assert.*;
-
+import tws.entity.ParkingLot;
 @RunWith(SpringRunner.class)
 @MybatisTest
-public class EmployeeMapperTest {
+public class ParkingLotTest {
 
     @Autowired
-    private EmployeeMapper employeeMapper;
+    private ParkingLotMapper parkingLotMapper;
 
     JdbcTemplate jdbcTemplate;
 
@@ -35,14 +37,22 @@ public class EmployeeMapperTest {
     }
 
     @Test
-    public void shouldFetchAllEmployees() {
+    public void shouldFetchAllParkingLot() {
         // given
-        jdbcTemplate.execute("INSERT INTO EMPLOYEE VALUES(1,'zhangsan', 21);");
+        jdbcTemplate.execute("");
         // when
-        List<Employee> employeeList = employeeMapper.selectAll();
+        List<ParkingLot> ParkingLotList = parkingLotMapper.selectAll();
         // then
-        assertEquals(1, employeeList.size());
+        assertEquals(1, ParkingLotList.size());
     }
-    
+    @Test
+    public void should_return_one_parkingLot(int id) {
+        // given
+        jdbcTemplate.execute("");
+        // when
+        List<ParkingLot> ParkingLotList = parkingLotMapper.selectById(id);
+        // then
+        assertEquals(1, ParkingLotList.size());
+    }
     
 }
